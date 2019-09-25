@@ -1,5 +1,6 @@
 server "ttnote_deploy", user: "deploy", roles: %w{app db web}
 set :rails_env, 'development'
+set :bundle_without, 'test'
 set :branch, 'beta'
 set :deploy_to, "/var/www/ttnote_backend_beta"
 
