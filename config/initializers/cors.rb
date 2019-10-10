@@ -13,7 +13,7 @@ if Rails.env.production?
       resource '*',
                headers: :any,
                methods: [:get, :post, :put, :patch, :delete, :options, :head],
-               expose: :any,
+               expose: %w(Authorization),
                max_age: 600
     end
   end
@@ -25,7 +25,7 @@ else
       resource '*',
                headers: :any,
                methods: [:get, :post, :put, :patch, :delete, :options, :head],
-               expose: :any,
+               expose: %w(Authorization),
                max_age: 600
     end
   end
