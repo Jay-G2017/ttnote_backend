@@ -39,6 +39,7 @@
     <orderEntry type="library" scope="PROVIDED" name="activesupport (v5.2.3, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="airbrussh (v1.3.3, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="arel (v9.0.0, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.13, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.4.5, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.3, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.17.3, RVM: ruby-2.4.6) [gem]" level="application" />
@@ -50,11 +51,18 @@
     <orderEntry type="library" scope="PROVIDED" name="capistrano3-puma (v3.1.1, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.1.5, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.4, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="devise (v4.7.1, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="devise-jwt (v0.6.0, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.3, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="dry-auto_inject (v0.6.1, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="dry-configurable (v0.8.3, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="dry-container (v0.7.2, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="dry-core (v0.4.9, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.8.0, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ffi (v1.11.1, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v0.4.2, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.6.0, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="jwt (v2.2.1, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="listen (v3.1.5, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="loofah (v2.2.3, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.7.1, RVM: ruby-2.4.6) [gem]" level="application" />
@@ -70,6 +78,7 @@
     <orderEntry type="library" scope="PROVIDED" name="net-ssh (v5.2.0, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nio4r (v2.5.2, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.10.4, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="orm_adapter (v0.5.0, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="puma (v3.12.1, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack (v2.0.7, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-test (v1.1.0, RVM: ruby-2.4.6) [gem]" level="application" />
@@ -80,6 +89,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rake (v12.3.3, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-fsevent (v0.10.3, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-inotify (v0.10.0, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="responders (v3.0.0, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-core (v3.8.2, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-expectations (v3.8.4, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-mocks (v3.8.1, RVM: ruby-2.4.6) [gem]" level="application" />
@@ -94,6 +104,8 @@
     <orderEntry type="library" scope="PROVIDED" name="thor (v0.20.3, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thread_safe (v0.3.6, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v1.2.5, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="warden (v1.2.8, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="warden-jwt_auth (v0.4.0, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-driver (v0.7.1, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="websocket-extensions (v0.1.4, RVM: ruby-2.4.6) [gem]" level="application" />
   </component>
