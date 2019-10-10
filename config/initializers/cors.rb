@@ -5,12 +5,28 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
-# Rails.application.config.middleware.insert_before 0, Rack::Cors do
-#   allow do
-#     origins 'example.com'
-#
-#     resource '*',
-#       headers: :any,
-#       methods: [:get, :post, :put, :patch, :delete, :options, :head]
-#   end
-# end
+if Rails.env.production?
+  Rails.application.config.middleware.insert_before 0, Rack::Cors do
+    allow do
+      origins 'http://ttnote.cn'
+
+      resource '*',
+               headers: :any,
+               methods: [:get, :post, :put, :patch, :delete, :options, :head],
+               expose: :any,
+               max_age: 600
+    end
+  end
+else
+  Rails.application.config.middleware.insert_before 0, Rack::Cors do
+    allow do
+      origins 'localhost:3000', 'http://beta.ttnote.cn'
+
+      resource '*',
+               headers: :any,
+               methods: [:get, :post, :put, :patch, :delete, :options, :head],
+               expose: :any,
+               max_age: 600
+    end
+  end
+end
