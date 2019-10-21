@@ -16,6 +16,6 @@ class ConfirmationsController < Devise::ConfirmationsController
 
   # The path used after confirmation.
   def after_confirmation_path
-    Rails.env.production? ? '//ttnote.cn/login?emailConfirmed' : '//beta.ttnote.cn/login?emailConfirmed'
+    ENV['TTNOTE_FRONT_BASE'] + 'login?emailConfirmed'
   end
 end
