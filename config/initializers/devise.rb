@@ -11,7 +11,7 @@ Devise.setup do |config|
   config.secret_key = Rails.application.credentials.devise
   config.jwt do |jwt|
     jwt.secret = Rails.application.credentials.devise
-    jwt.expiration_time = 600
+    jwt.expiration_time = 3600
   end
 
   # ==> Controller configuration
