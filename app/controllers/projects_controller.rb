@@ -8,11 +8,11 @@ class ProjectsController < ApplicationController
       projects = category.projects
     end
 
-    render json: projects
+    render json: projects, include: ''
   end
 
   def all
-    render json: current_user.projects
+    render json: current_user.projects, include: ''
   end
 
   def create
@@ -28,14 +28,14 @@ class ProjectsController < ApplicationController
     project.user = current_user
     project.save!
 
-    render json: project
+    render json: project, include: ''
   end
 
   def show
     project = Project.find params[:id]
     authorize project, :show?
 
-    render json: project
+    render json: project, include: 'todos,titles.todos'
   end
 
   def update
@@ -43,7 +43,7 @@ class ProjectsController < ApplicationController
     authorize project, :show?
     project.update!(project_params)
 
-    render json: project
+    render json: project, include: ''
   end
 
   def destroy
