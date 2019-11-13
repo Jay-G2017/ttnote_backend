@@ -29,4 +29,6 @@ Rails.application.routes.draw do
 
   resources :tomatoes, only: [:update, :destroy]
 
+  patch '/user_settings', to: 'user_settings#update', default: {format: :json}
+
 end

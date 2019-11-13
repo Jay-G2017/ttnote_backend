@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
     project = Project.find params[:id]
     authorize project, :show?
 
-    render json: project, include: 'todos,titles.todos'
+    render json: project, include: 'todos.tomatoes,titles.todos.tomatoes'
   end
 
   def update

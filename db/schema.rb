@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_03_000001) do
+ActiveRecord::Schema.define(version: 2019_11_13_091114) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
@@ -65,6 +65,17 @@ ActiveRecord::Schema.define(version: 2019_11_03_000001) do
     t.index ["todo_id"], name: "index_tomatoes_on_todo_id"
   end
 
+  create_table "user_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.decimal "tomato_minutes", precision: 10, default: "25", null: false
+    t.decimal "short_rest_minutes", precision: 10, default: "5", null: false
+    t.decimal "long_rest_minutes", precision: 10, default: "15", null: false
+    t.boolean "auto_rest", default: true, null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_settings_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -87,4 +98,5 @@ ActiveRecord::Schema.define(version: 2019_11_03_000001) do
   add_foreign_key "titles", "projects"
   add_foreign_key "todos", "projects"
   add_foreign_key "tomatoes", "todos"
+  add_foreign_key "user_settings", "users"
 end
