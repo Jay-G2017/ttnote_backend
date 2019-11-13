@@ -1,5 +1,5 @@
 class ProjectSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :desc
   has_many :todos
   has_many :titles
 
