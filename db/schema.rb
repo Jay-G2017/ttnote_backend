@@ -12,22 +12,22 @@
 
 ActiveRecord::Schema.define(version: 2019_11_13_091114) do
 
-  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "name", null: false
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "name", limit: 191, null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
-  create_table "jwt_blacklist", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "jwt_blacklist", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "jti", null: false
     t.datetime "exp", null: false
     t.index ["jti"], name: "index_jwt_blacklist_on_jti"
   end
 
-  create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "name", null: false
+  create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "name", limit: 191, null: false
     t.text "desc"
     t.bigint "user_id"
     t.bigint "category_id", null: false
@@ -37,16 +37,16 @@ ActiveRecord::Schema.define(version: 2019_11_13_091114) do
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
-  create_table "titles", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "name"
+  create_table "titles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "name", limit: 191
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_titles_on_project_id"
   end
 
-  create_table "todos", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "name"
+  create_table "todos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "name", limit: 191
     t.boolean "done", default: false
     t.bigint "title_id", null: false
     t.bigint "project_id", null: false
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2019_11_13_091114) do
     t.index ["title_id"], name: "index_todos_on_title_id"
   end
 
-  create_table "tomatoes", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "tomatoes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "minutes"
     t.text "desc"
     t.bigint "todo_id", null: false
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2019_11_13_091114) do
     t.index ["todo_id"], name: "index_tomatoes_on_todo_id"
   end
 
-  create_table "user_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "user_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.decimal "tomato_minutes", precision: 10, default: "25", null: false
     t.decimal "short_rest_minutes", precision: 10, default: "5", null: false
     t.decimal "long_rest_minutes", precision: 10, default: "15", null: false
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2019_11_13_091114) do
     t.index ["user_id"], name: "index_user_settings_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
