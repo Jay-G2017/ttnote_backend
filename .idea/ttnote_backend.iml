@@ -87,7 +87,7 @@
     <orderEntry type="library" scope="PROVIDED" name="puma (v3.12.1, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pundit (v2.1.0, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack (v2.0.7, RVM: ruby-2.4.6) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rack-cors (v1.0.3, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack-cors (v1.0.5, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-test (v1.1.0, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails (v5.2.3, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-dom-testing (v2.0.3, RVM: ruby-2.4.6) [gem]" level="application" />
