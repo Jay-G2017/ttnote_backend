@@ -4,7 +4,6 @@ class ProjectV1Serializer < ActiveModel::Serializer
   has_many :titles, serializer: TitleV1Serializer
 
   def todo_ids
-    # object.todos.where(title_id: -1).map(&:id)
-    object.todos.where(title_id: -1).select(:id)
+    object.todos.where(title_id: -1).select(:id).map(&:id)
   end
 end
