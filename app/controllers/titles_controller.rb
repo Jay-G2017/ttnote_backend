@@ -5,7 +5,7 @@ class TitlesController < ApplicationController
     title = project.titles.build(title_params)
     title.save!
 
-    render json: title, include: ''
+    render json: title, serializer: TitleV1Serializer
   end
 
   def update
@@ -13,7 +13,7 @@ class TitlesController < ApplicationController
     authorize title, :update?
     title.update!(title_params)
 
-    render json: title, include: ''
+    render json: title, serializer: TitleV1Serializer
   end
 
   def destroy
