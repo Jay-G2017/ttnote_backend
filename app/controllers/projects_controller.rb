@@ -1,18 +1,18 @@
 class ProjectsController < ApplicationController
   def index
     if params[:category_id].to_i == -1
-      projects = current_user.projects.where(category_id: -1)
+      projects = current_user.projects.where(category_id: -1).updated_desc
     else
       category = Category.find params[:category_id]
       authorize category, :show?
-      projects = category.projects
+      projects = category.projects.updated_desc
     end
 
     render json: projects, include: ''
   end
 
   def all
-    render json: current_user.projects, include: ''
+    render json: current_user.projects.updated_desc, include: ''
   end
 
   def create
