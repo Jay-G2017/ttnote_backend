@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_13_091114) do
+ActiveRecord::Schema.define(version: 2019_12_26_142557) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 191, null: false
@@ -62,7 +62,9 @@ ActiveRecord::Schema.define(version: 2019_11_13_091114) do
     t.bigint "todo_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["todo_id"], name: "index_tomatoes_on_todo_id"
+    t.index ["user_id"], name: "index_tomatoes_on_user_id"
   end
 
   create_table "user_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

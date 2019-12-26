@@ -10,6 +10,15 @@ class User < ApplicationRecord
   has_many :categories
   has_many :projects
   has_one :user_setting
+  has_many :tomatoes
+
+  def today_tomatoes
+    self.tomatoes.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
+  end
+
+  def today_tomato_size
+    today_tomatoes.count
+  end
 
   private
   def create_user_setting
