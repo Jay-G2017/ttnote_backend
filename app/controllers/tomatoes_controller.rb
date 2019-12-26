@@ -3,6 +3,7 @@ class TomatoesController < ApplicationController
     todo = Todo.find params[:todo_id]
     authorize todo, :update?
     tomato = todo.tomatoes.build(tomato_params)
+    tomato.user = current_user
     tomato.save!
 
     render json: tomato
@@ -22,6 +23,12 @@ class TomatoesController < ApplicationController
     tomato.destroy!
 
     render json: {success: true}
+  end
+
+  def today_tomato_count
+    size = current_user.today_tomato_size
+
+    render json: {size: size}
   end
 
   private
