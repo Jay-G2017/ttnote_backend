@@ -30,6 +30,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     category = Category.find params[:id]
+    authorize category, :destroy?
     category.destroy!
 
     render json: { success: true }
