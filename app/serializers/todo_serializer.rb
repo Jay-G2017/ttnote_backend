@@ -1,4 +1,4 @@
 class TodoSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :title_id, :done
   has_many :tomatoes
 end

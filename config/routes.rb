@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   root 'welcome#index', defaults: {format: :json}
   get '/try_authenticate', to: 'welcome#try_authenticate', defaults: {format: :json}
 
-  resources :categories, only: [:index, :show, :update, :create], defaults: {format: :json} do
+  resources :categories, only: [:index, :show, :update, :create, :destroy], defaults: {format: :json} do
     resources :projects, only: [:index, :create]
   end
 
@@ -30,5 +30,6 @@ Rails.application.routes.draw do
   resources :tomatoes, only: [:update, :destroy]
 
   patch '/user_settings', to: 'user_settings#update', default: {format: :json}
+  get '/today_tomato_count', to: 'tomatoes#today_tomato_count', default: {format: :json}
 
 end

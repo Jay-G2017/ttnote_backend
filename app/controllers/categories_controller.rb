@@ -28,14 +28,13 @@ class CategoriesController < ApplicationController
     render json: category
   end
 
-  # def destroy
-  #   category = Category.find params[:id]
-  #   undone_projects_count = category.undone_projects.count
-  #   starred_projects_count = category.starred_projects.count
-  #   category.destroy!
-  #
-  #   render json: { success: true, undone_projects_count:  undone_projects_count, starred_projects_count: starred_projects_count }
-  # end
+  def destroy
+    category = Category.find params[:id]
+    authorize category, :destroy?
+    category.destroy!
+
+    render json: { success: true }
+  end
 
   private
   def category_params
