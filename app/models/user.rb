@@ -30,7 +30,7 @@ class User < ApplicationRecord
     new_category.user = self
     new_category.save!
 
-    desc = "Hi, #{self.email.split('@').first}\n欢迎使用蕃茄时光！\n\n你可以点击下方的按钮来创建任务或者任务组。\n点击播放按钮会开始一个蕃茄。\n\n蕃茄快乐！"
+    desc = "亲爱的, #{self.email.split('@').first}\n欢迎使用蕃茄时光！\n\n你可以点击下方的按钮来创建任务或者任务组。\n点击播放按钮会开始一个蕃茄。\n\n蕃茄快乐！"
     new_project = Project.new({name: '欢迎使用蕃茄时光', desc: desc})
     new_project.category = new_category
     new_project.user = self
