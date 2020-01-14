@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_26_142557) do
+ActiveRecord::Schema.define(version: 2020_01_14_105505) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 191, null: false
@@ -68,9 +68,9 @@ ActiveRecord::Schema.define(version: 2019_12_26_142557) do
   end
 
   create_table "user_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.decimal "tomato_minutes", precision: 10, default: "25", null: false
-    t.decimal "short_rest_minutes", precision: 10, default: "5", null: false
-    t.decimal "long_rest_minutes", precision: 10, default: "15", null: false
+    t.float "tomato_minutes", default: 25.0, null: false
+    t.float "short_rest_minutes", default: 5.0, null: false
+    t.float "long_rest_minutes", default: 15.0, null: false
     t.boolean "auto_rest", default: true, null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false

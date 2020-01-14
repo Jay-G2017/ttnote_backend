@@ -1,24 +1,7 @@
-# README
+### 蕃茄时光后端代码
+* 纯api模式
+* jwt token authentication
+* Ruby version: v2.4.6
+* 数据库mysql
+* 布署用的capistrano + puma 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
