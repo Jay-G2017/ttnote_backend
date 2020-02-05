@@ -39,7 +39,9 @@
     <orderEntry type="library" scope="PROVIDED" name="activestorage (v5.2.3, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activesupport (v5.2.3, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="airbrussh (v1.3.3, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ams_lazy_relationships (v0.3.0, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="arel (v9.0.0, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="batch-loader (v1.4.1, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bcrypt (v3.1.13, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.4.5, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.3, RVM: ruby-2.4.6) [gem]" level="application" />
@@ -96,6 +98,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rake (v12.3.3, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-fsevent (v0.10.3, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rb-inotify (v0.10.0, RVM: ruby-2.4.6) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="redis (v4.1.3, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="responders (v3.0.0, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-core (v3.8.2, RVM: ruby-2.4.6) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-expectations (v3.8.4, RVM: ruby-2.4.6) [gem]" level="application" />
