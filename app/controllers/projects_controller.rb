@@ -2,10 +2,10 @@ class ProjectsController < ApplicationController
   def index
     if params[:category_id].to_i == -1
       projects = current_user.projects.where(category_id: -1).updated_desc
-    elsif params[:category_id] == 'tagged_projects'
+    elsif params[:category_id] == 'tagged'
       todo_ids = redis_today_todo_ids
       tomatoes_count = Tomato.where(todo_id: todo_ids).count
-      today_project = {id: 'todayProject', name: '今日任务', desc: '已完成的任务会在零点过后移除', tomatoes_count: tomatoes_count}
+      today_project = {id: 'todayProject', name: '今日任务', desc: '已完成的任务会在零点过后移除', tomatoesCount: tomatoes_count}
 
       projects = [today_project]
     else
