@@ -39,7 +39,7 @@ class ProjectsController < ApplicationController
 
   def show
     project_id = params[:id]
-    if project_id == 'today_project'
+    if project_id == 'todayProject'
       render_today_project
     else
       render_normal_project
