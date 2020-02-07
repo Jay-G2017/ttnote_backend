@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
     elsif params[:category_id] == 'tagged'
       todo_ids = redis_today_todo_ids
       tomatoes_count = Tomato.where(todo_id: todo_ids).count
-      today_project = {id: 'todayProject', name: '今日任务', desc: '已完成的任务会在零点过后移除', tomatoesCount: tomatoes_count}
+      today_project = {id: 'todayProject', name: '⭐今日任务', desc: '已完成的任务会在每日的零点过后移除', tomatoesCount: tomatoes_count}
 
       projects = [today_project]
     else
@@ -100,13 +100,14 @@ class ProjectsController < ApplicationController
     #     title_ids: [],
     #     titles: {'1': {id: 1, todo_ids: []}},
     # }
-    result = {id: 'todayProject'}
+    result = {id: 'todayProject', name: '⭐今日任务', desc: '已完成的任务会在每日的零点过后移除'}
     todo_ids = redis_today_todo_ids
     todos = Todo.where(id: todo_ids)
 
     title_todo_ids = {}
     todo_ids.uniq.each do |todo_id|
       todo = todos.find{ |todo| todo.id == todo_id.to_i }
+      next if todo.title_id == -1
       if title_todo_ids[todo.title_id].nil?
         title_todo_ids[todo.title_id] = [todo.id]
       else
@@ -119,6 +120,7 @@ class ProjectsController < ApplicationController
     todos_json = ActiveModelSerializers::SerializableResource.new(
         todos, {include: 'tomatoes'}
     ).as_json
+    todos_json.each{ |todo| todo['starred'] = true}
     todos_hash = Hash[todos_json.map{ |todo| [todo[:id], todo]}]
 
     titles = Title.where(id: title_ids)
