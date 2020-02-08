@@ -100,7 +100,7 @@ class ProjectsController < ApplicationController
     #     title_ids: [],
     #     titles: {'1': {id: 1, todo_ids: []}},
     # }
-    result = {id: 'todayProject', name: '⭐今日任务', desc: '已完成的任务会在每日的零点过后移除'}
+    result = {id: 'todayProject', name: '今日任务', desc: '已完成的任务会在每日的零点过后移除'}
     todo_ids = redis_today_todo_ids
     todos = Todo.where(id: todo_ids)
 
