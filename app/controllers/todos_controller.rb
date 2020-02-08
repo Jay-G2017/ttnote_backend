@@ -27,6 +27,7 @@ class TodosController < ApplicationController
   def destroy
     todo = Todo.find params[:id]
     authorize todo, :destroy?
+
     todo.destroy!
 
     render json: {success: true}
