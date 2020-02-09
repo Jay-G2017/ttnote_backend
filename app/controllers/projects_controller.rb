@@ -39,10 +39,14 @@ class ProjectsController < ApplicationController
 
   def show
     project_id = params[:id]
-    if project_id == 'todayProject'
-      render_today_project
+    if params[:simple]
+      render_project_simple
     else
-      render_normal_project
+      if project_id == 'todayProject'
+        render_today_project
+      else
+        render_normal_project
+      end
     end
   end
 
@@ -65,6 +69,18 @@ class ProjectsController < ApplicationController
   private
   def project_params
     params.require(:project).permit(:name, :desc)
+  end
+
+  def render_project_simple
+    if params[:id] == 'todayProject'
+      todo_ids = redis_today_todo_ids
+      tomatoes_count = Tomato.where(todo_id: todo_ids).count
+      project = {id: 'todayProject', name: '⭐今日任务', desc: '已完成的任务会在每日的零点过后移除', tomatoesCount: tomatoes_count}
+    else
+      project = Project.find params[:id]
+      authorize project, :show?
+    end
+    render json: project, include: ''
   end
 
   def render_normal_project
