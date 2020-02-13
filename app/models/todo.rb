@@ -1,5 +1,5 @@
 class Todo < ApplicationRecord
-  belongs_to :project
+  belongs_to :project, touch: true
   belongs_to :title, optional: true
   has_many :tomatoes, dependent: :destroy
   has_one :today_todo
