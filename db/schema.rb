@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_31_142028) do
+ActiveRecord::Schema.define(version: 2020_01_14_105505) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 191, null: false
@@ -43,15 +43,6 @@ ActiveRecord::Schema.define(version: 2020_01_31_142028) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_titles_on_project_id"
-  end
-
-  create_table "today_todos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "todo_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["todo_id"], name: "index_today_todos_on_todo_id", unique: true
-    t.index ["user_id"], name: "index_today_todos_on_user_id"
   end
 
   create_table "todos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -107,8 +98,6 @@ ActiveRecord::Schema.define(version: 2020_01_31_142028) do
   add_foreign_key "categories", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "titles", "projects"
-  add_foreign_key "today_todos", "todos"
-  add_foreign_key "today_todos", "users"
   add_foreign_key "todos", "projects"
   add_foreign_key "tomatoes", "todos"
   add_foreign_key "user_settings", "users"

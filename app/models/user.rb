@@ -11,7 +11,6 @@ class User < ApplicationRecord
   has_many :projects
   has_one :user_setting
   has_many :tomatoes
-  has_many :today_todos
 
   def today_tomatoes
     self.tomatoes.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)

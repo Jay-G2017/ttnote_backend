@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
     if params[:category_id].to_i == -1
       projects = current_user.projects.where(category_id: -1).updated_desc
     elsif params[:category_id] == 'tagged'
-      todo_ids = redis_today_todo_ids
+      todo_ids = current_user.redis_today_todo_ids
       tomatoes_count = Tomato.where(todo_id: todo_ids).count
       today_project = {id: 'todayProject', name: '⭐今日任务', desc: '已完成的任务会在每日的零点过后移除', tomatoesCount: tomatoes_count}
 
@@ -73,7 +73,7 @@ class ProjectsController < ApplicationController
 
   def render_project_simple
     if params[:id] == 'todayProject'
-      todo_ids = redis_today_todo_ids
+      todo_ids = current_user.redis_today_todo_ids
       tomatoes_count = Tomato.where(todo_id: todo_ids).count
       project = {id: 'todayProject', name: '⭐今日任务', desc: '已完成的任务会在每日的零点过后移除', tomatoesCount: tomatoes_count}
     else
@@ -86,7 +86,7 @@ class ProjectsController < ApplicationController
   def render_normal_project
     project = Project.find params[:id]
     authorize project, :show?
-    today_todo_ids = redis_today_todo_ids
+    today_todo_ids = current_user.redis_today_todo_ids
     if params[:v1]
       result = ActiveModelSerializers::SerializableResource.new(
           project, {include: 'todos.tomatoes,titles', serializer: ProjectV1Serializer, key_transform: :camel_lower}
@@ -117,7 +117,7 @@ class ProjectsController < ApplicationController
     #     titles: {'1': {id: 1, todo_ids: []}},
     # }
     result = {id: 'todayProject', name: '今日任务', desc: '已完成的任务会在每日的零点过后移除'}
-    todo_ids = redis_today_todo_ids
+    todo_ids = current_user.redis_today_todo_ids
     todos = Todo.where(id: todo_ids)
 
     title_todo_ids = {}
