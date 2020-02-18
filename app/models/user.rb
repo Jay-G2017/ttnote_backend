@@ -11,7 +11,6 @@ class User < ApplicationRecord
   has_many :projects
   has_one :user_setting
   has_many :tomatoes
-  has_many :today_todos
 
   def today_tomatoes
     self.tomatoes.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
@@ -19,6 +18,26 @@ class User < ApplicationRecord
 
   def today_tomato_size
     today_tomatoes.count
+  end
+
+  def clear_finished_today_todos
+    redis = REDIS
+    finished_todo_ids = today_todos.where(done: true).pluck(:id)
+    finished_todo_ids.each do |todo_id|
+      redis.lrem(redis_today_todo_ids_key, 0, todo_id)
+    end
+  end
+
+  def redis_today_todo_ids_key
+    "today_todos:#{self.id}:todo_ids"
+  end
+
+  def redis_today_todo_ids
+    REDIS.lrange(redis_today_todo_ids_key, 0, -1)
+  end
+
+  def today_todos
+    Todo.where(id: redis_today_todo_ids)
   end
 
   private

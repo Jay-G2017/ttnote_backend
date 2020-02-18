@@ -39,7 +39,7 @@ class TodosController < ApplicationController
     authorize todo, :update?
     redis = REDIS
     starred = params[:starred]
-    todo_ids_key = redis_today_todo_ids_key
+    todo_ids_key = current_user.redis_today_todo_ids_key
 
     if starred
       redis.rpush(todo_ids_key, todo_id)
