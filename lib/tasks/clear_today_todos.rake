@@ -4,5 +4,6 @@ namespace :redis do
     User.find_each do |user|
       user.clear_finished_today_todos
     end
+    puts 'success'
   end
 end
