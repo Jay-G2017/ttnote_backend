@@ -20,6 +20,26 @@ class User < ApplicationRecord
     today_tomatoes.count
   end
 
+  def clear_finished_today_todos
+    redis = REDIS
+    finished_todo_ids = today_todos.where(done: true).pluck(:id)
+    finished_todo_ids.each do |todo_id|
+      redis.lrem(redis_today_todo_ids_key, 0, todo_id)
+    end
+  end
+
+  def redis_today_todo_ids_key
+    "today_todos:#{self.id}:todo_ids"
+  end
+
+  def redis_today_todo_ids
+    REDIS.lrange(redis_today_todo_ids_key, 0, -1)
+  end
+
+  def today_todos
+    Todo.where(id: redis_today_todo_ids)
+  end
+
   private
   def create_user_setting
     self.create_user_setting!

@@ -1,4 +1,6 @@
-class TodoSerializer < ActiveModel::Serializer
+class TodoSerializer < BaseSerializer
   attributes :id, :name, :title_id, :done
-  has_many :tomatoes
+
+  # 避免N+1查询
+  lazy_has_many :tomatoes
 end

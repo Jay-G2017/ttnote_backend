@@ -27,9 +27,27 @@ class TodosController < ApplicationController
   def destroy
     todo = Todo.find params[:id]
     authorize todo, :destroy?
+
     todo.destroy!
 
     render json: {success: true}
+  end
+
+  def tag_today_todo
+    todo_id = params[:id]
+    todo = Todo.find params[:id]
+    authorize todo, :update?
+    redis = REDIS
+    starred = params[:starred]
+    todo_ids_key = current_user.redis_today_todo_ids_key
+
+    if starred
+      redis.rpush(todo_ids_key, todo_id)
+    else
+      redis.lrem(todo_ids_key, 0, todo_id)
+    end
+
+    render json: {success: true}.to_json
   end
 
   private

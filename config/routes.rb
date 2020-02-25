@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   resources :titles, only: [:update, :destroy]
   resources :todos, only: [:update, :destroy] do
+    patch 'tag_today_todo', on: :member
     resources :tomatoes, only: :create
   end
 
