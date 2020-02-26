@@ -28,6 +28,9 @@ gem "pundit"
 gem 'active_model_serializers'
 gem "ams_lazy_relationships"
 
+gem 'ed25519', '~> 1.2.0'
+gem 'bcrypt_pbkdf', '~> 1.0'
+
 group :development, :test do
   gem 'dotenv-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

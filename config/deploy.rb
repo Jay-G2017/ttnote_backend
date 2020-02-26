@@ -1,10 +1,10 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.11.1"
+lock "~> 3.12.0"
 
 set :application, "ttnote_backend"
 set :repo_url, "git@github.com:Jay-G2017/ttnote_backend.git"
 set :rvm_type, :user
-set :rvm_ruby_version, '2.4.6'
+# set :rvm_ruby_version, '2.4.6'
 
 append :linked_files, "config/database.yml", "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
