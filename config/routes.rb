@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
   resources :tomatoes, only: [:update, :destroy]
 
+  resources :today_tomatoes, only: [:index]
+
   patch '/user_settings', to: 'user_settings#update', default: {format: :json}
   get '/today_tomato_count', to: 'tomatoes#today_tomato_count', default: {format: :json}
 
