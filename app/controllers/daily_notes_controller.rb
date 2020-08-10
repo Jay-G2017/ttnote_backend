@@ -4,13 +4,13 @@ class DailyNotesController < ApplicationController
       arr = params['date'].split('-').map(&:to_i)
       date = Date.new(*arr)
     else
-      date = Date.today
+      date = Date.current
     end
 
-    note = DailyNote.where(user_id: current_user.id).where({ created_at: date.beginning_of_day..date.end_of_day }).first
+    note = DailyNote.where(user_id: current_user.id).where({ date_at: date }).first
     if note.present?
     else
-      note = create
+      note = create(date)
     end
     render json: note
   end
@@ -25,9 +25,10 @@ class DailyNotesController < ApplicationController
 
   private
 
-  def create
+  def create(date)
     note = DailyNote.new
     note.user = current_user
+    note.date_at = date
     note.save!
     note
   end

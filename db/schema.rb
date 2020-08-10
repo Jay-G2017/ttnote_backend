@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_12_093627) do
+ActiveRecord::Schema.define(version: 2020_08_10_142614) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 191, null: false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_093627) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date_at"
     t.index ["user_id"], name: "index_daily_notes_on_user_id"
   end
 
