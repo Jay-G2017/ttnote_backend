@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :projects, only: %i[index create]
   end
 
-  get '/projects', to: 'projects#all', default: { format: :json }
+  get '/projects', to: 'projects#all', defaults: { format: :json }
   resources :projects, only: %i[show update destroy], defaults: { format: :json } do
     resources :titles, only: [:create] do
       resources :todos, only: [:create]
