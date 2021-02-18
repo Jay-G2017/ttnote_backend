@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
   end
 
   def all
-    render json: current_user.projects.updated_desc, include: ''
+    render json: current_user.projects.updated_desc, include: 'category'
   end
 
   def create

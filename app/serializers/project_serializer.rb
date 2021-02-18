@@ -2,6 +2,7 @@ class ProjectSerializer < ActiveModel::Serializer
   attributes :id, :name, :desc, :created_at, :updated_at, :tomatoes_count
   has_many :todos
   has_many :titles
+  has_one :category
 
   def todos
     object.todos.where(title_id: -1)
