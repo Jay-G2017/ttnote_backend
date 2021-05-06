@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'welcome#index', defaults: { format: :json }
   get '/try_authenticate', to: 'welcome#try_authenticate', defaults: { format: :json }
+  get '/hello', to: 'welcome#hello', defaults: { format: :json }
 
   resources :categories, only: %i[index show update create destroy], defaults: { format: :json } do
     resources :projects, only: %i[index create]
