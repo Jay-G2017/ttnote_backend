@@ -21,12 +21,13 @@ Rails.application.routes.draw do
     resources :titles, only: [:create] do
       resources :todos, only: [:create]
     end
+
+    resources :tomatoes, only: :create, to: 'tomatoes#new_create'
   end
 
   resources :titles, only: %i[update destroy]
   resources :todos, only: %i[update destroy] do
     patch 'tag_today_todo', on: :member
-    resources :tomatoes, only: :create
   end
 
   resources :tomatoes, only: %i[update destroy]

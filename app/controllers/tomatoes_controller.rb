@@ -9,6 +9,16 @@ class TomatoesController < ApplicationController
     render json: tomato
   end
 
+  def new_create
+    project = Project.find params[:project_id]
+    authorize project, :update?
+    tomato = project.tomatoes.build(tomato_params)
+    tomato.user = current_user
+    tomato.save!
+
+    render json: tomato
+  end
+
   def update
     tomato = Tomato.find params[:id]
     authorize tomato.todo, :update?
@@ -33,6 +43,6 @@ class TomatoesController < ApplicationController
 
   private
   def tomato_params
-    params.require(:tomato).permit(:minutes, :desc)
+    params.require(:tomato).permit(:minutes, :desc, :status, :node_id)
   end
 end
