@@ -50,6 +50,13 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def new_show
+    project_id = params[:id]
+    project = Project.find params[:id]
+    authorize project, :show?
+    render json: project
+  end
+
   def update
     project = Project.find params[:id]
     authorize project, :show?
