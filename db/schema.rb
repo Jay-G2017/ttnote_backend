@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_26_142557) do
+ActiveRecord::Schema.define(version: 2021_06_05_050521) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 191, null: false
@@ -18,6 +18,15 @@ ActiveRecord::Schema.define(version: 2019_12_26_142557) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "daily_notes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.text "desc"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "date_at"
+    t.index ["user_id"], name: "index_daily_notes_on_user_id"
   end
 
   create_table "jwt_blacklist", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -59,18 +68,22 @@ ActiveRecord::Schema.define(version: 2019_12_26_142557) do
   create_table "tomatoes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "minutes"
     t.text "desc"
-    t.bigint "todo_id", null: false
+    t.bigint "todo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.bigint "project_id", null: false
+    t.integer "node_id"
+    t.integer "status"
+    t.index ["project_id"], name: "index_tomatoes_on_project_id"
     t.index ["todo_id"], name: "index_tomatoes_on_todo_id"
     t.index ["user_id"], name: "index_tomatoes_on_user_id"
   end
 
   create_table "user_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.decimal "tomato_minutes", precision: 10, default: "25", null: false
-    t.decimal "short_rest_minutes", precision: 10, default: "5", null: false
-    t.decimal "long_rest_minutes", precision: 10, default: "15", null: false
+    t.float "tomato_minutes", default: 25.0, null: false
+    t.float "short_rest_minutes", default: 5.0, null: false
+    t.float "long_rest_minutes", default: 15.0, null: false
     t.boolean "auto_rest", default: true, null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -96,6 +109,7 @@ ActiveRecord::Schema.define(version: 2019_12_26_142557) do
   end
 
   add_foreign_key "categories", "users"
+  add_foreign_key "daily_notes", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "titles", "projects"
   add_foreign_key "todos", "projects"

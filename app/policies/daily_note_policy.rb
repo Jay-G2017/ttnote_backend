@@ -1,0 +1,2 @@
+class DailyNotePolicy < ApplicationPolicy
+end

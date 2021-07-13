@@ -1,7 +1,11 @@
 class WelcomeController < ApplicationController
-  skip_before_action :authenticate_user!,  only: :index
+  skip_before_action :authenticate_user!,  only: [:index, :hello]
   def index
-    render json: {hello_from: 'ttnote'}
+    render json: {hello_from: 'ttnote😂'}
+  end
+
+  def hello
+    render json: {hello: 'world'}
   end
 
   def try_authenticate

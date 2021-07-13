@@ -2,6 +2,12 @@ class ProjectsController < ApplicationController
   def index
     if params[:category_id].to_i == -1
       projects = current_user.projects.where(category_id: -1).updated_desc
+    elsif params[:category_id] == 'tagged'
+      todo_ids = current_user.redis_today_todo_ids
+      tomatoes_count = Tomato.where(todo_id: todo_ids).count
+      today_project = {id: 'todayProject', name: '⭐今日任务', desc: '已完成的任务会在每日的零点过后移除', tomatoesCount: tomatoes_count}
+
+      projects = [today_project]
     else
       category = Category.find params[:category_id]
       authorize category, :show?
@@ -12,7 +18,7 @@ class ProjectsController < ApplicationController
   end
 
   def all
-    render json: current_user.projects.updated_desc, include: ''
+    render json: current_user.projects.updated_desc, include: 'category'
   end
 
   def create
@@ -32,22 +38,23 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    project_id = params[:id]
+    if params[:simple]
+      render_project_simple
+    else
+      if project_id == 'todayProject'
+        render_today_project
+      else
+        render_normal_project
+      end
+    end
+  end
+
+  def simple_show
+    project_id = params[:id]
     project = Project.find params[:id]
     authorize project, :show?
-    if params[:v1]
-      result = ActiveModelSerializers::SerializableResource.new(
-          project, {include: 'todos.tomatoes,titles', serializer: ProjectV1Serializer, key_transform: :camel_lower}
-      ).as_json
-      todos_json = Hash[result[:todos].map{ |todo| [todo[:id], todo] }]
-      titles_json = Hash[result[:titles].map{ |title| [title[:id], title]}]
-
-      result[:todos] = todos_json
-      result[:titleIds] = result[:titles].map{ |title| title[:id]}
-      result[:titles] = titles_json
-      render json: result.to_json
-    else
-      render json: project, include: 'todos.tomatoes,titles.todos.tomatoes'
-    end
+    render json: project, serializer: Simple::ProjectSerializer
   end
 
   def update
@@ -66,8 +73,90 @@ class ProjectsController < ApplicationController
     render json: {success: true}
   end
 
+  
+
   private
   def project_params
     params.require(:project).permit(:name, :desc)
+  end
+
+  def render_project_simple
+    if params[:id] == 'todayProject'
+      todo_ids = current_user.redis_today_todo_ids
+      tomatoes_count = Tomato.where(todo_id: todo_ids).count
+      project = {id: 'todayProject', name: '⭐今日任务', desc: '已完成的任务会在每日的零点过后移除', tomatoesCount: tomatoes_count}
+    else
+      project = Project.find params[:id]
+      authorize project, :show?
+    end
+    render json: project, include: ''
+  end
+
+  def render_normal_project
+    project = Project.find params[:id]
+    authorize project, :show?
+    today_todo_ids = current_user.redis_today_todo_ids
+    if params[:v1]
+      result = ActiveModelSerializers::SerializableResource.new(
+          project, {include: 'todos.tomatoes,titles', serializer: ProjectV1Serializer, key_transform: :camel_lower}
+      ).as_json
+      todos_hash = Hash[result[:todos].map do |todo|
+        todo['starred'] = today_todo_ids.include?(todo[:id].to_s)
+        [todo[:id], todo]
+      end
+      ]
+      titles_hash = Hash[result[:titles].map{ |title| [title[:id], title]}]
+
+      result[:todos] = todos_hash
+      result[:titleIds] = result[:titles].map{ |title| title[:id]}
+      result[:titles] = titles_hash
+      render json: result.to_json
+    else
+      render json: project, include: 'todos.tomatoes,titles.todos.tomatoes'
+    end
+  end
+
+  def render_today_project
+    # 目标结果
+    # {
+    #     id: 'today_project',
+    #     todos: {'1': {id: 1}, '2': {id: 2}},
+    #     todo_ids: [],
+    #     title_ids: [],
+    #     titles: {'1': {id: 1, todo_ids: []}},
+    # }
+    result = {id: 'todayProject', name: '今日任务', desc: '已完成的任务会在每日的零点过后移除'}
+    todo_ids = current_user.redis_today_todo_ids
+    todos = Todo.where(id: todo_ids)
+
+    title_todo_ids = {}
+    todo_ids.uniq.each do |todo_id|
+      todo = todos.find{ |todo| todo.id == todo_id.to_i }
+      next if todo.title_id == -1
+      if title_todo_ids[todo.title_id].nil?
+        title_todo_ids[todo.title_id] = [todo.id]
+      else
+        title_todo_ids[todo.title_id] << todo.id
+      end
+    end
+
+    title_ids = title_todo_ids.keys
+    untitled_todo_ids = todos.select{|todo| todo.title_id == -1}.map(&:id)
+    todos_json = ActiveModelSerializers::SerializableResource.new(
+        todos, {include: 'tomatoes'}
+    ).as_json
+    todos_json.each{ |todo| todo['starred'] = true}
+    todos_hash = Hash[todos_json.map{ |todo| [todo[:id], todo]}]
+
+    titles = Title.where(id: title_ids)
+    titles_json = titles.map{ |title| {id: title.id, name: title.name, todoIds: title_todo_ids[title.id]}}
+    title_hash = Hash[titles_json.map{ |title| [title[:id], title]}]
+
+    result[:todos] = todos_hash
+    result[:titles] = title_hash
+    result[:titleIds] = title_ids
+    result[:todoIds] = untitled_todo_ids
+
+    render json: result.to_json
   end
 end
