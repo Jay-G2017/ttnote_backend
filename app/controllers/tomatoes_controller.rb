@@ -1,4 +1,13 @@
 class TomatoesController < ApplicationController
+  def index
+    project = Project.find params[:id]
+    authorize project, :show?
+    tomatoes = project.tomatoes
+    
+    render json: tomatoes
+  end
+
+
   def create
     todo = Todo.find params[:todo_id]
     authorize todo, :update?
@@ -21,7 +30,7 @@ class TomatoesController < ApplicationController
 
   def update
     tomato = Tomato.find params[:id]
-    authorize tomato.todo, :update?
+    authorize tomato.project, :update?
     tomato.update!(tomato_params)
 
     render json: tomato

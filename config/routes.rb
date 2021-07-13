@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   end
 
   get '/projects', to: 'projects#all', defaults: { format: :json }
+  get '/projects/:id/simple_show', to: 'projects#simple_show', defaults: { format: :json }
+  get '/projects/:id/tomatoes', to: 'tomatoes#index', defaults: { format: :json }
+
   resources :projects, only: %i[show update destroy], defaults: { format: :json } do
     resources :titles, only: [:create] do
       resources :todos, only: [:create]

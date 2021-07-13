@@ -50,11 +50,11 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def new_show
+  def simple_show
     project_id = params[:id]
     project = Project.find params[:id]
     authorize project, :show?
-    render json: project
+    render json: project, serializer: Simple::ProjectSerializer
   end
 
   def update
@@ -72,6 +72,8 @@ class ProjectsController < ApplicationController
 
     render json: {success: true}
   end
+
+  
 
   private
   def project_params
