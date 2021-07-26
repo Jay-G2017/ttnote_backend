@@ -38,7 +38,7 @@ class TomatoesController < ApplicationController
 
   def destroy
     tomato = Tomato.find params[:id]
-    authorize tomato.todo, :destroy?
+    authorize tomato.project, :destroy?
     tomato.destroy!
 
     render json: {success: true}
