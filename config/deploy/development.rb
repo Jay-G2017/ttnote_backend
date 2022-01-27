@@ -1,4 +1,4 @@
-server "ttnote_deploy", user: "deploy", roles: %w{app db web}
+server "ttnoteLightHouse", user: "ubuntu", roles: %w{app db web}
 set :rails_env, 'development'
 set :bundle_without, 'test'
 set :branch, 'beta'

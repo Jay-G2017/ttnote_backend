@@ -3,8 +3,15 @@ lock "~> 3.12.0"
 
 set :application, "ttnote_backend"
 set :repo_url, "git@github.com:Jay-G2017/ttnote_backend.git"
-set :rvm_type, :user
+# set :rvm_type, :user
+set :rbenv_type, :user # or :system, or :fullstaq (for Fullstaq Ruby), 
+set :rbenv_ruby, '2.6.3' # depends on your rbenv setup
 # set :rvm_ruby_version, '2.4.6'
+
+# set :rbenv_path, '/usr'
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} /usr/bin/rbenv exec"
+set :rbenv_map_bins, %w{rake gem bundle ruby rails puma}
+set :rbenv_roles, :all # default value
 
 append :linked_files, "config/database.yml", "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"

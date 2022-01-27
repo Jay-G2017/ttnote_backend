@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_05_050521) do
+ActiveRecord::Schema.define(version: 2022_01_27_071445) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", limit: 191, null: false
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2021_06_05_050521) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.bigint "project_id", null: false
-    t.integer "node_id"
+    t.string "node_id"
     t.integer "status"
     t.index ["project_id"], name: "index_tomatoes_on_project_id"
     t.index ["todo_id"], name: "index_tomatoes_on_todo_id"
